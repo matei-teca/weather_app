@@ -15,7 +15,7 @@ async function fetchData() {
 
 const loadEvent = function() {
   fetchData()
-  console.log(data[3])
+  console.log(data)
 
 }
 

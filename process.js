@@ -6,7 +6,7 @@ const cities = JSON.parse(fs.readFileSync('world-cities_json.json', 'utf8'))
 
 
 cities.forEach(city => {
-    citiesDB.push(city)
+    citiesDB.push(city.name)
 })
 
 
