@@ -1,6 +1,7 @@
 import * as fs from 'node:fs';
 import * as http from 'node:http';
 import * as path from 'node:path';
+import {citiesDB} from './process.js';
 
 const mediaTypes = {
 	"html": "text/html",
@@ -66,33 +67,45 @@ const server = http.createServer((req, res) => {
 	`;
 	if (req.method === "GET") {
 
-		let filePath = req.url === "/data.js" ? path.resolve(`${process.cwd()}/data.js`) : path.resolve(`${process.cwd()}/client${req.url}`);
-	
-		fs.access(filePath, fs.constants.R_OK, (err) => {
-			if (err) {
-				res.statusCode = 404;
-				res.end(errorHTML);
-			} else {
-				if (fs.statSync(filePath).isDirectory()) {
-					filePath += '/index.html';
-				}
-				fs.readFile(filePath, (err, data) => {
-					if (err) {
-						res.statusCode = 500;
-						res.end(errorHTML);
-					} else {
-						let mediaType = mediaTypes[filePath.split('.').pop()];
-	
-						if (!mediaType) {
-							mediaType = 'text/plain';
-						}
-						res.writeHead(200, { "Content-Type": mediaType });
-						res.write(data);
-						res.end();
+		if(req.url === "/data.js"){
+
+			res.writeHead(200, { "Content-Type": "text/javascript" });
+			res.write(`
+				const data=${JSON.stringify(citiesDB)};
+				export {data};
+			`);
+			res.end();
+
+		}else{
+
+			let filePath = req.url === "/movies" || req.url === "/genres" || req.url === "/actors" || req.url === "/directors" || req.url === "/writers" ? path.resolve(`${process.cwd()}/client/`) : path.resolve(`${process.cwd()}/client${req.url}`);
+		
+			fs.access(filePath, fs.constants.R_OK, (err) => {
+				if (err) {
+					res.statusCode = 404;
+					res.end(errorHTML);
+				} else {
+					if (fs.statSync(filePath).isDirectory()) {
+						filePath += '/index.html';
 					}
-				});
-			}
-		});
+					fs.readFile(filePath, (err, data) => {
+						if (err) {
+							res.statusCode = 500;
+							res.end(errorHTML);
+						} else {
+							let mediaType = mediaTypes[filePath.split('.').pop()];
+		
+							if (!mediaType) {
+								mediaType = 'text/plain';
+							}
+							res.writeHead(200, { "Content-Type": mediaType });
+							res.write(data);
+							res.end();
+						}
+					});
+				}
+			});
+		}
 
 	}else if(req.method === "POST" && req.url === "/error"){
 		const chunks = [];
