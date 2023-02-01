@@ -2,7 +2,7 @@
 let rootEl, inputEl, divContainer, 
 sectionUp, nameDiv, dateDiv, 
 iconDiv, iconImg, iconText, 
-temperatureDiv, sectionDown, sectionLeft, minMaxTempDiv, currentTempDiv;
+temperatureDiv, sectionDown, sectionLeft, minMaxTempDiv, currentTempDiv, inputContainer;
 
 const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -101,9 +101,15 @@ const displayStructure = (data) => {
 const createInput = () => {
   rootEl = document.getElementById("root");
 
+  document.body.className = "bg-info";
+
+  inputContainer = document.createElement("div");
+  inputContainer.id = "inputContainer";
+  rootEl.appendChild(inputContainer);
+
   inputEl = document.createElement("input");
   inputEl.placeholder = "test";
-  rootEl.appendChild(inputEl);
+  inputContainer.appendChild(inputEl);
 
   divContainer = document.createElement("div");
   divContainer.id = "divContainer";
@@ -137,7 +143,7 @@ const setBootstrap = () => {
   // divContainer.classList.add("card", "border-success", "mb-3")
 
 
-  divContainer.className = "card border-muted";
+  divContainer.className = "card border-muted shadow-lg";
   iconImg.className = "d-inline";
   iconText.className = "d-inline";
   sectionDown.className = "card-footer bg-transparent border-muted";
