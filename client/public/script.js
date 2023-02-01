@@ -2,7 +2,7 @@
 let rootEl, inputEl, divContainer, 
 sectionUp, nameDiv, dateDiv, 
 iconDiv, iconImg, iconText, 
-temperatureDiv, sectionDown;
+temperatureDiv, sectionDown, sectionLeft, minMaxTempDiv, currentTempDiv;
 
 
 const API_KEY = 'a812d4795a874a76b3081357233101';
@@ -26,19 +26,23 @@ const displayStructure = (data) => {
   sectionUp.id = "sectionUp";
   divContainer.appendChild(sectionUp);
 
+  sectionLeft = document.createElement("div");
+  sectionLeft.id = "sectionLeft";
+  sectionUp.appendChild(sectionLeft);
+
   nameDiv = document.createElement("div");
   nameDiv.id = "nameDiv";
-  sectionUp.appendChild(nameDiv);
+  sectionLeft.appendChild(nameDiv);
   nameDiv.innerText = data.location.name
 
   dateDiv = document.createElement("div");
   dateDiv.id = "dateDiv";
-  sectionUp.appendChild(dateDiv);
+  sectionLeft.appendChild(dateDiv);
   dateDiv.innerText = data.forecast.forecastday[0].date
 
   iconDiv = document.createElement("div");
   iconDiv.id = "iconDiv";
-  sectionUp.appendChild(iconDiv);
+  sectionLeft.appendChild(iconDiv);
 
   iconImg = document.createElement("img");
   iconImg.src = data.forecast.forecastday[0].day.condition.icon;
@@ -48,11 +52,20 @@ const displayStructure = (data) => {
   iconText.id = "iconText";
   iconText.innerText = data.forecast.forecastday[0].day.condition.text;
   iconDiv.appendChild(iconText);
-  
 
   temperatureDiv = document.createElement("div");
   temperatureDiv.id = "temperatureDiv";
   sectionUp.appendChild(temperatureDiv);
+
+  currentTempDiv = document.createElement("div");
+  currentTempDiv.id = "currentTempDiv";
+  currentTempDiv.innerText = data.forecast.forecastday[0].day.avgtemp_c + "\u00B0";
+  temperatureDiv.appendChild(currentTempDiv);
+
+  minMaxTempDiv = document.createElement("div");
+  minMaxTempDiv.id = "minMaxTempDiv";
+  minMaxTempDiv.innerText = `${data.forecast.forecastday[0].day.mintemp_c} \u00B0 / ${data.forecast.forecastday[0].day.maxtemp_c} \u00B0`;
+  temperatureDiv.appendChild(minMaxTempDiv);
   
   // Botoom section
 
@@ -67,9 +80,7 @@ const displayStructure = (data) => {
     sectionDown.appendChild(dayDiv)
   }
   
-
-
-
+  setBootstrap()
 
 }
 
@@ -81,8 +92,8 @@ const createInput = () => {
   rootEl.appendChild(inputEl);
 
   divContainer = document.createElement("div");
-divContainer.id = "divContainer";
-rootEl.appendChild(divContainer);
+  divContainer.id = "divContainer";
+  rootEl.appendChild(divContainer);
 
   inputEl.addEventListener("input", function(e){
     if (e.target.value.length > 1) {
@@ -104,6 +115,29 @@ rootEl.appendChild(divContainer);
       });
     }
   })
+
+
+}
+
+const setBootstrap = () => {
+  // divContainer.classList.add("card", "border-success", "mb-3")
+
+
+  divContainer.className = "card border-muted";
+  iconImg.className = "d-inline";
+  iconText.className = "d-inline";
+  sectionDown.className = "card-footer bg-transparent border-muted";
+  currentTempDiv.className = "fs-1"
+
+
+  // sectionLeft.className = "d-inline";
+  // temperatureDiv.className = "d-inline";
+  // nameDiv.className = "card-header bg-transparent";
+  // currentTempDiv.className = "d-block";
+  // minMaxTempDiv.className = "d-block";
+  // sectionUp.className = "d-inline"
+  // sectionLeft.className = "p-25"
+
 
 
 }

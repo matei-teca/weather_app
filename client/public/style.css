@@ -20,20 +20,36 @@ textarea{resize: none;}
 [readonly]{pointer-events: none; opacity: .4;}
 
 body{
-    display: flex;
+    /* display: flex; */
     font-family: 'Montserrat', sans-serif;
+    /* text-align: center;
+    justify-content: center; */
+    padding: 150px;
+    /* text-align: center; */
+}
+
+#divContainer {
+    width: 600px;
+    height: 300px;
     text-align: center;
+}
+
+#sectionUp {
+    height: 60%;
+    display: flex;
     justify-content: center;
+    align-items: center;
 }
 
-h1 {
-    margin: 10px;
+#sectionLeft {
+    margin-right: 140px;
 }
 
-p {
-    margin: 20px;
+#currentTempDiv {
+    font-size: 30px;
 }
 
-img {
-    height: 50%
-}
+
+/* #iconDiv {
+    display: inline;
+} */
