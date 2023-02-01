@@ -108,7 +108,7 @@ const createInput = () => {
   rootEl.appendChild(inputContainer);
 
   inputEl = document.createElement("input");
-  inputEl.placeholder = "test";
+  inputEl.placeholder = "Search for a city";
   inputContainer.appendChild(inputEl);
 
   divContainer = document.createElement("div");
