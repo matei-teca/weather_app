@@ -2,7 +2,8 @@
 let rootEl, inputEl, divContainer, 
 sectionUp, nameDiv, dateDiv, 
 iconDiv, iconImg, iconText, 
-temperatureDiv, sectionDown, sectionLeft, minMaxTempDiv, currentTempDiv;
+temperatureDiv, sectionDown, sectionLeft, minMaxTempDiv, currentTempDiv,favBtn, favList;
+let favArr = []
 
 const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -73,6 +74,8 @@ const displayStructure = (data) => {
   sectionDown.id = "sectionDown";
   divContainer.appendChild(sectionDown);
 
+
+
   for(let i = 1; i < 7; i++){
     let dayDiv = document.createElement("div");
     dayDiv.style.paddingLeft = "8px"
@@ -103,6 +106,7 @@ const createInput = () => {
 
   inputEl = document.createElement("input");
   inputEl.placeholder = "test";
+  inputEl.setAttribute('list', 'favList')
   rootEl.appendChild(inputEl);
 
   divContainer = document.createElement("div");
@@ -118,6 +122,8 @@ const createInput = () => {
       google.maps.event.addListener(autocomplete, "place_changed", function () {
         // console.log(autocomplete.getPlace());
         let place = autocomplete.getPlace();
+        fetchData(place.name);
+      });
   
         // inputEl.value = place.name + " ";
         // if (inputEl.value.indexOf(" ") != -1) display.style.visibility = "visible";
@@ -125,8 +131,6 @@ const createInput = () => {
         //   display.style.visibility = "hidden";
         // }
 
-        fetchData(place.name);
-      });
     }
   })
 
@@ -156,10 +160,33 @@ const setBootstrap = () => {
 
 }
 
+const favorites = () =>{
+
+  favBtn = document.createElement('button')
+  favBtn.id = "favBtn"
+  favBtn.innerText = "Add to favorites"
+  favBtn.className = "btn btn-secondary"
+  rootEl.append(favBtn)
+
+  favList = document.createElement('datalist')
+  favList.id = 'favList' 
+
+  favBtn.addEventListener('click', (e) =>{
+    let option = document.createElement('option')
+    option.value = inputEl.value
+    favList.append(option)
+    console.log(favList)
+  })
+
+
+
+}
+
 const loadEvent = function() {
 
 
   createInput();
+  favorites()
 
 
 
