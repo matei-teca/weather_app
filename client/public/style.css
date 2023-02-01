@@ -43,12 +43,27 @@ body{
 
 #sectionLeft {
     margin-right: 140px;
+
 }
 
 #currentTempDiv {
-    font-size: 30px;
+    font-size: 70px;
+
 }
 
+#nameDiv {
+    font-size: 40px;
+}
+
+#iconText {
+    font-size: 25px;
+}
+
+#sectionDown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 /* #iconDiv {
     display: inline;

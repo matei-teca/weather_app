@@ -4,11 +4,11 @@ sectionUp, nameDiv, dateDiv,
 iconDiv, iconImg, iconText, 
 temperatureDiv, sectionDown, sectionLeft, minMaxTempDiv, currentTempDiv;
 
-
-const API_KEY = 'a812d4795a874a76b3081357233101';
+const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 async function fetchData(currentPlace) {
-  let url = `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${currentPlace}&days=7`
+  const API_KEY = 'a812d4795a874a76b3081357233101';
+  let url = `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${currentPlace}&days=7`;
 
   const response = await fetch(url);
   const data = await response.json();
@@ -75,11 +75,25 @@ const displayStructure = (data) => {
 
   for(let i = 1; i < 7; i++){
     let dayDiv = document.createElement("div");
+    dayDiv.style.paddingLeft = "8px"
+    dayDiv.style.paddingRight= "8px"
     dayDiv.id = `day${i}`;
 
+    let dayName = document.createElement("div");
+    let dayIcon = document.createElement("img");
+    let dayTemp = document.createElement("div");
+    
+    dayDiv.append(dayName, dayIcon, dayTemp);
+
+    dayName.innerText = days[(new Date(data.forecast.forecastday[i].date)).getDay()];
+    dayIcon.src = data.forecast.forecastday[i].day.condition.icon;
+    dayTemp.innerText = `${data.forecast.forecastday[i].day.mintemp_c}\u00B0 / ${data.forecast.forecastday[i].day.maxtemp_c}\u00B0`;
+    dayTemp.style.fontSize = "15px"
+    
     sectionDown.appendChild(dayDiv)
   }
   
+  console.log(typeof data.forecast.forecastday[2].date);
   setBootstrap()
 
 }
