@@ -55,8 +55,16 @@ h1 {
     text-align: center;
     border-radius: 35px;
     margin-top: 20px;
+    transition: 2s;
+
     
     /* box-shadow: ; */
+}
+
+#divContainer:hover {
+    width: 600px;
+    height: 400px;
+    transition: 1s;
 }
 
 #sectionUp {
@@ -101,7 +109,9 @@ h1 {
 
 input{
     border: 1px solid gray;
-    padding: 10px
+    padding: 10px;
+    border-radius: 10px;
+
 }
 
 #inputContainer{
