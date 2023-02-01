@@ -1,5 +1,10 @@
 
-let rootEl;
+let rootEl, inputEl, divContainer, 
+sectionUp, nameDiv, dateDiv, 
+iconDiv, iconImg, iconText, 
+temperatureDiv, sectionDown;
+
+
 const API_KEY = 'a812d4795a874a76b3081357233101';
 
 async function fetchData(currentPlace) {
@@ -17,41 +22,41 @@ const displayStructure = (data) => {
 
   divContainer.innerHTML = "";
 
-  let sectionUp = document.createElement("div");
+  sectionUp = document.createElement("div");
   sectionUp.id = "sectionUp";
   divContainer.appendChild(sectionUp);
 
-  let nameDiv = document.createElement("div");
+  nameDiv = document.createElement("div");
   nameDiv.id = "nameDiv";
   sectionUp.appendChild(nameDiv);
   nameDiv.innerText = data.location.name
 
-  let dateDiv = document.createElement("div");
+  dateDiv = document.createElement("div");
   dateDiv.id = "dateDiv";
   sectionUp.appendChild(dateDiv);
   dateDiv.innerText = data.forecast.forecastday[0].date
 
-  let iconDiv = document.createElement("div");
+  iconDiv = document.createElement("div");
   iconDiv.id = "iconDiv";
   sectionUp.appendChild(iconDiv);
 
-  let iconImg = document.createElement("img");
+  iconImg = document.createElement("img");
   iconImg.src = data.forecast.forecastday[0].day.condition.icon;
   iconDiv.appendChild(iconImg);
 
-  let iconText = document.createElement("div");
+  iconText = document.createElement("div");
   iconText.id = "iconText";
   iconText.innerText = data.forecast.forecastday[0].day.condition.text;
   iconDiv.appendChild(iconText);
   
 
-  let temperatureDiv = document.createElement("div");
+  temperatureDiv = document.createElement("div");
   temperatureDiv.id = "temperatureDiv";
   sectionUp.appendChild(temperatureDiv);
   
   // Botoom section
 
-  let sectionDown = document.createElement("div");
+  sectionDown = document.createElement("div");
   sectionDown.id = "sectionDown";
   divContainer.appendChild(sectionDown);
 
@@ -70,10 +75,12 @@ const displayStructure = (data) => {
 
 const createInput = () => {
   rootEl = document.getElementById("root");
-  let inputEl = document.createElement("input");
+
+  inputEl = document.createElement("input");
   inputEl.placeholder = "test";
   rootEl.appendChild(inputEl);
-  let divContainer = document.createElement("div");
+
+  divContainer = document.createElement("div");
 divContainer.id = "divContainer";
 rootEl.appendChild(divContainer);
 
