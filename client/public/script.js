@@ -1,8 +1,10 @@
+
 let rootEl;
 const API_KEY = 'a812d4795a874a76b3081357233101';
 
 async function fetchData(currentPlace) {
   let url = `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${currentPlace}&days=7`
+
   const response = await fetch(url);
   const data = await response.json();
 
@@ -101,7 +103,10 @@ rootEl.appendChild(divContainer);
 
 const loadEvent = function() {
 
+
   createInput();
+
+
 
 }
 
