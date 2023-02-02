@@ -109,8 +109,8 @@ h1 {
     /* background-color: blue; */
     width: 50vw;
     height: 100vh;
-    left: 50%;
-    top: 0px;
+    left: 45vw;
+    top: 55px;
     transition: 1.5s;
 
 }
@@ -183,13 +183,16 @@ input {
     border: 1px solid rgba(0, 0, 0, 0.476);
     padding: 10px;
     border-radius: 10px;
-    color: white !important;
+    color: black !important;
     max-width: 200px;
+    background-color: rgba(255, 255, 255, 0.807);
 
 }
 
 input:focus {
     border: 1px solid rgb(255, 255, 255);
+    background-color: rgba(255, 255, 255, 0.807);
+
 }
 
 #inputContainer {
@@ -264,22 +267,43 @@ input:focus {
 
 }
 
-
-.favList {
-    width: 30vw;
-    max-height: 400px;
-    border: 2px solid black;
-    border-radius: 15px;
-    color: black;
-    background-color: white;
-    overflow-x: auto;
+.favDiv {
+    position: absolute;
+    top: 200px;
+    left: 10vw;
+    /* background-color: red; */
 
 }
 
 .favDiv {
     position: absolute;
     top: 200px;
-    left: 40px;
+    left: 10vw;
+    /* background-color: red; */
+
+}
+
+
+.favList {
+    width: 30vw;
+    max-height: 420px;
+    border: 2px solid black;
+    border-radius: 15px;
+    color: black;
+    background-color: white;
+    overflow-x: auto;
+    padding: 20px
+
+}
+
+.cityImg {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    left: 0px;
+    top: 0px;
+    z-index: -2;
+    opacity: 0.4;
 
 }
 
