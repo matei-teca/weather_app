@@ -199,18 +199,15 @@ const addFavorites = () =>{
 }
 
 const showFavorites = () =>{
-  let mainContainer
-  if(bool){
-    favDiv.hidden = false
-  mainContainer = document.querySelector(".mainContainer");
-  mainContainer.className = "mainContainerAside";
-  console.log("works")
-  }else{
-  favDiv.hidden = true
-  mainContainer = document.querySelector(".mainContainerAside");
-  mainContainer.className = 'mainContainer'
-}
+
+let mainContainer = document.querySelector("#mC")
 bool = !bool
+favDiv.hidden = bool
+if(bool){
+  mainContainer.className = 'mainContainer';
+}else{
+  mainContainer.className = "mainContainerAside";
+  }
 }
 
 const loadEvent = function() {
