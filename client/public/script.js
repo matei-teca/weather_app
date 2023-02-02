@@ -1,13 +1,64 @@
 
-let rootEl, inputEl, divContainer, 
-sectionUp, nameDiv, dateDiv, 
-iconDiv, iconImg, iconText, 
-temperatureDiv, sectionDown, 
-sectionLeft, minMaxTempDiv, 
-currentTempDiv, inputContainer,
+let rootEl, inputEl, divContainer, sectionUp, nameDiv, dateDiv, 
+iconDiv, iconImg, iconText, temperatureDiv, sectionDown, 
+sectionLeft, minMaxTempDiv, currentTempDiv, inputContainer,
 favBtn, showBtn, favList, favDiv,bool = true;
 
 const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+const introAnimation = () => {
+  const introImg = document.querySelector(".introImg");
+  const introContainer = document.querySelector(".introContainer");
+
+  setTimeout(function(){
+    introImg.className = "introImgVisible";
+
+    setTimeout(function(){
+      introContainer.className = "introContainerHide";
+      introImg.className = "introImgHide";
+
+      setTimeout(function(){
+        introContainer.hidden = true;
+        introImg.hidden = true;
+      }, 4000)
+      
+    },3000)
+    
+  },1000)
+}
+
+const createInput = () => {
+  rootEl = document.getElementById("root");
+
+  document.body.className = "bg-info";
+
+  inputContainer = document.createElement("div");
+  inputContainer.id = "inputContainer";
+  rootEl.append(inputContainer);
+  
+  inputEl = document.createElement("input");
+  inputEl.placeholder = "Search for a city";
+  inputContainer.append(inputEl);
+  
+  divContainer = document.createElement("div");
+  divContainer.id = "divContainer";
+  rootEl.append(divContainer);
+
+  inputEl.addEventListener("input", function(e){
+    if (e.target.value.length > 1) {
+      let autocomplete = new google.maps.places.Autocomplete(inputEl, {
+        types: ["(cities)"],
+      });
+
+      google.maps.event.addListener(autocomplete, "place_changed", function () {
+        let place = autocomplete.getPlace();
+        fetchData(place.name);
+      });
+    }
+    
+  })
+
+}
 
 async function fetchData(currentPlace) {
   const API_KEY = 'a812d4795a874a76b3081357233101';
@@ -62,11 +113,10 @@ const displayStructure = (data) => {
   minMaxTempDiv = document.createElement("div");
   minMaxTempDiv.id = "minMaxTempDiv";
   minMaxTempDiv.innerText = `${data.forecast.forecastday[0].day.mintemp_c} \u00B0 / ${
-    data.forecast.forecastday[0].day.maxtemp_c} \u00B0`;
+  data.forecast.forecastday[0].day.maxtemp_c} \u00B0`;
   temperatureDiv.appendChild(minMaxTempDiv);
   
   // Botoom section
-
   sectionDown = document.createElement("div");
   sectionDown.id = "sectionDown";
   divContainer.append(sectionDown);
@@ -83,7 +133,7 @@ const displayStructure = (data) => {
     dayName.innerText = days[(new Date(data.forecast.forecastday[i].date)).getDay()];
     dayIcon.src = data.forecast.forecastday[i].day.condition.icon;
     dayTemp.innerText = `${data.forecast.forecastday[i].day.mintemp_c}\u00B0 / ${
-      data.forecast.forecastday[i].day.maxtemp_c}\u00B0`;
+    data.forecast.forecastday[i].day.maxtemp_c}\u00B0`;
     dayTemp.style.fontSize = "15px"
     
     dayDiv.append(dayName, dayIcon, dayTemp);
@@ -94,77 +144,19 @@ const displayStructure = (data) => {
   setBootstrap()
 }
 
-const createInput = () => {
-  rootEl = document.getElementById("root");
+const setBootstrap = () => {
 
-  document.body.className = "bg-info";
+  divContainer.className = "card border-muted shadow-lg";
+  iconImg.className = "d-inline";
+  iconText.className = "d-inline";
+  sectionDown.className = "card-footer bg-transparent border-muted";
+  currentTempDiv.className = "fs-1"
+  showBtn.className = 'btn btn-secondary'
+  favBtn.className = 'btn btn-secondary'
 
-  inputContainer = document.createElement("div");
-  inputContainer.id = "inputContainer";
-  rootEl.appendChild(inputContainer);
-  
-  inputEl = document.createElement("input");
-  inputEl.placeholder = "Search for a city";
-  inputContainer.appendChild(inputEl);
-  
-  divContainer = document.createElement("div");
-  divContainer.id = "divContainer";
-  rootEl.appendChild(divContainer);
-
-  inputEl.addEventListener("input", function(e){
-    if (e.target.value.length > 1) {
-      let autocomplete = new google.maps.places.Autocomplete(inputEl, {
-        types: ["(cities)"],
-      });
-
-      google.maps.event.addListener(autocomplete, "place_changed", function () {
-        let place = autocomplete.getPlace();
-        fetchData(place.name);
-      });
-  
-        // inputEl.value = place.name + " ";
-        // if (inputEl.value.indexOf(" ") != -1) display.style.visibility = "visible";
-        // else {
-        //   display.style.visibility = "hidden";
-        // }
-
-    }
-    
-  })
-
-  
-  
 }
 
-const addFavorites = () =>{
-  let li = document.createElement('p')
-  li.innerText = inputEl.value
-  favList.append(li)
-  showBtn.hidden = false
-  li.addEventListener('click', (e) =>{
-    console.log(e.target.innerText)
-    inputEl.value = e.target.innerText
-    fetchData(e.target.innerText)
-  })
-  
-}
-
-const showFavorites = () =>{
-  let mainContainer
-  if(bool){
-    favDiv.hidden = false
-  mainContainer = document.querySelector(".mainContainer");
-  mainContainer.className = "mainContainerAside";
-  console.log("works")
-  }else{
-  favDiv.hidden = true
-  mainContainer = document.querySelector(".mainContainerAside");
-  mainContainer.className = 'mainContainer'
-  }
-bool = !bool
-}
-
-const createFavEl = () =>{
+const createFavElements = () =>{
 
   favDiv = document.createElement('div')
   favDiv.className = 'favDiv'
@@ -191,47 +183,41 @@ const createFavEl = () =>{
   showBtn.addEventListener('click',showFavorites)
   inputContainer.insertAdjacentElement('afterbegin',showBtn)
   showBtn.hidden = true
-  
-  }
-
-const setBootstrap = () => {
-
-  divContainer.className = "card border-muted shadow-lg";
-  iconImg.className = "d-inline";
-  iconText.className = "d-inline";
-  sectionDown.className = "card-footer bg-transparent border-muted";
-  currentTempDiv.className = "fs-1"
-  showBtn.className = 'btn btn-secondary'
-  favBtn.className = 'btn btn-secondary'
-
 }
 
-const introAnimation = () => {
-  const introImg = document.querySelector(".introImg");
-  const introContainer = document.querySelector(".introContainer");
-
-  setTimeout(function(){
-    introImg.className = "introImgVisible";
-
-    setTimeout(function(){
-      introContainer.className = "introContainerHide";
-      introImg.className = "introImgHide";
-
-      setTimeout(function(){
-        introContainer.hidden = true;
-        introImg.hidden = true;
-      }, 4000)
-
-    },3000)
+const addFavorites = () =>{
+  let li = document.createElement('p')
+  li.innerText = inputEl.value
+  favList.append(li)
+  showBtn.hidden = false
+  li.addEventListener('click', (e) =>{
+    console.log(e.target.innerText)
+    inputEl.value = e.target.innerText
+    fetchData(e.target.innerText)
+  })
   
-  },1000)
+}
+
+const showFavorites = () =>{
+  let mainContainer
+  if(bool){
+    favDiv.hidden = false
+  mainContainer = document.querySelector(".mainContainer");
+  mainContainer.className = "mainContainerAside";
+  console.log("works")
+  }else{
+  favDiv.hidden = true
+  mainContainer = document.querySelector(".mainContainerAside");
+  mainContainer.className = 'mainContainer'
+}
+bool = !bool
 }
 
 const loadEvent = function() {
 
   introAnimation();
   createInput();
-  createFavEl();
+  createFavElements();
 
 }
 
