@@ -22,7 +22,7 @@ textarea{resize: none;}
 #body{
     font-family: 'Montserrat', sans-serif;
     text-align: center;
-    color: white
+    color: white;
     /* padding: 30px; */
 
 }
@@ -33,15 +33,34 @@ h1 {
     width: 40%;
     left: 30%;
     top: 10%;
+    z-index: 10;
 }
 
-#mainContainer{
+.mainContainer{
+    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
     /* background-color: blue; */
     width: 100vw;
     height: 100vh;
+    left: 0px;
+    top: 20px;
+    transition: 1s;
+}
+
+.mainContainerAside {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: blue; */
+    width: 50vw;
+    height: 100vh;
+    left: 50%;
+    top: 0px;
+    transition: 1.5s;
+
 }
 
 #root{
@@ -57,7 +76,7 @@ h1 {
     border-radius: 35px;
     margin-top: 20px;
     transition: 2s;
-    opacity: 0.7;
+    opacity: 0.9;
     color: black
 
 }
@@ -110,13 +129,16 @@ h1 {
 }
 
 input{
-    border: 1px solid gray;
+    border: 1px solid rgba(0, 0, 0, 0.476);
     padding: 10px;
     border-radius: 10px;
     color: white !important;
     max-width: 200px;
 
+}
 
+input:focus{
+    border: 1px solid rgb(255, 255, 255);
 }
 
 #inputContainer{

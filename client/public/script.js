@@ -134,6 +134,14 @@ const createInput = () => {
         fetchData(place.name);
       });
     }
+    
+  })
+
+  inputEl.addEventListener("dblclick", function(){
+    const mainContainer = document.querySelector(".mainContainer");
+    mainContainer.className = "mainContainerAside";
+
+    console.log("works")
   })
 
 
