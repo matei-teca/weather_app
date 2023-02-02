@@ -238,7 +238,7 @@ const introAnimation = () => {
 
 const loadEvent = function() {
 
-  introAnimation();
+  // introAnimation();
   createInput();
   createFavEl();
 

@@ -109,8 +109,8 @@ h1 {
     /* background-color: blue; */
     width: 50vw;
     height: 100vh;
-    left: 50%;
-    top: 0px;
+    left: 45vw;
+    top: 55px;
     transition: 1.5s;
 
 }
@@ -264,23 +264,26 @@ input:focus {
 
 }
 
+.favDiv {
+    position: absolute;
+    top: 200px;
+    left: 10vw;
+    /* background-color: red; */
+
+}
+
 .favList {
     width: 30vw;
-    max-height: 400px;
+    max-height: 420px;
     border: 2px solid black;
     border-radius: 15px;
     color: black;
     background-color: white;
     overflow-x: auto;
+    padding: 20px
 
 }
 
-.favDiv {
-    position: absolute;
-    top: 200px;
-    left: 40px;
-
-}
 
 
 /* #iconDiv {
