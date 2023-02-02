@@ -203,11 +203,8 @@ const showFavorites = () =>{
 let mainContainer = document.querySelector("#mC")
 bool = !bool
 favDiv.hidden = bool
-if(bool){
-  mainContainer.className = 'mainContainer';
-}else{
-  mainContainer.className = "mainContainerAside";
-  }
+bool ? mainContainer.className = 'mainContainer':
+ mainContainer.className = "mainContainerAside"
 }
 
 const loadEvent = function() {
