@@ -61,8 +61,9 @@ const displayStructure = (data) => {
 
   minMaxTempDiv = document.createElement("div");
   minMaxTempDiv.id = "minMaxTempDiv";
-  minMaxTempDiv.innerText = `${data.forecast.forecastday[0].day.mintemp_c} \u00B0 / ${data.forecast.forecastday[0].day.maxtemp_c} \u00B0`;
-  temperatureDiv.append(minMaxTempDiv);
+  minMaxTempDiv.innerText = `${data.forecast.forecastday[0].day.mintemp_c} \u00B0 / ${
+    data.forecast.forecastday[0].day.maxtemp_c} \u00B0`;
+  temperatureDiv.appendChild(minMaxTempDiv);
   
   // Botoom section
 
@@ -81,7 +82,8 @@ const displayStructure = (data) => {
     
     dayName.innerText = days[(new Date(data.forecast.forecastday[i].date)).getDay()];
     dayIcon.src = data.forecast.forecastday[i].day.condition.icon;
-    dayTemp.innerText = `${data.forecast.forecastday[i].day.mintemp_c}\u00B0 / ${data.forecast.forecastday[i].day.maxtemp_c}\u00B0`;
+    dayTemp.innerText = `${data.forecast.forecastday[i].day.mintemp_c}\u00B0 / ${
+      data.forecast.forecastday[i].day.maxtemp_c}\u00B0`;
     dayTemp.style.fontSize = "15px"
     
     dayDiv.append(dayName, dayIcon, dayTemp);
@@ -193,8 +195,6 @@ const createFavEl = () =>{
   }
 
 const setBootstrap = () => {
-  // divContainer.classList.add("card", "border-success", "mb-3")
-
 
   divContainer.className = "card border-muted shadow-lg";
   iconImg.className = "d-inline";
@@ -204,29 +204,16 @@ const setBootstrap = () => {
   showBtn.className = 'btn btn-secondary'
   favBtn.className = 'btn btn-secondary'
 
-
-  // sectionLeft.className = "d-inline";
-  // temperatureDiv.className = "d-inline";
-  // nameDiv.className = "card-header bg-transparent";
-  // currentTempDiv.className = "d-block";
-  // minMaxTempDiv.className = "d-block";
-  // sectionUp.className = "d-inline"
-  // sectionLeft.className = "p-25"
-
-
-
 }
 
-
-const loadEvent = function() {
+const introAnimation = () => {
   const introImg = document.querySelector(".introImg");
+  const introContainer = document.querySelector(".introContainer");
 
   setTimeout(function(){
     introImg.className = "introImgVisible";
 
-
     setTimeout(function(){
-      const introContainer = document.querySelector(".introContainer");
       introContainer.className = "introContainerHide";
       introImg.className = "introImgHide";
 
@@ -238,11 +225,13 @@ const loadEvent = function() {
     },3000)
   
   },1000)
+}
 
+const loadEvent = function() {
 
+  introAnimation();
   createInput();
   createFavEl();
-
 
 }
 
