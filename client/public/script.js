@@ -5,7 +5,7 @@ iconDiv, iconImg, iconText,
 temperatureDiv, sectionDown, 
 sectionLeft, minMaxTempDiv, 
 currentTempDiv, inputContainer,
-favBtn, showBtn, favList;
+favBtn, showBtn, favList, favDiv,bool = true;
 
 const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -160,26 +160,44 @@ const addFavorites = () =>{
 }
 
 const showFavorites = () =>{
-  favList.hidden = false
-  const mainContainer = document.querySelector(".mainContainer");
+  let mainContainer
+  if(bool){
+    favDiv.hidden = false
+  mainContainer = document.querySelector(".mainContainer");
   mainContainer.className = "mainContainerAside";
   console.log("works")
+  }else{
+  favDiv.hidden = true
+  mainContainer = document.querySelector(".mainContainerAside");
+  mainContainer.className = 'mainContainer'
+  }
+bool = !bool
 }
 
 const createFavEl = () =>{
+
+  favDiv = document.createElement('div')
+  favDiv.className = 'favDiv'
+  document.body.append(favDiv)
+  
+  let favListTitle = document.createElement('h2')
+  favListTitle.innerText = 'Favorite List'
+
   favList = document.createElement('div')
   favList.className = 'favList'
-  document.body.append(favList)
-  favList.hidden = true
+  favDiv.append(favListTitle,favList)
+  favDiv.hidden = true
   
   favBtn = document.createElement('button')
   favBtn.innerText = 'Add to Favorites'
+  favBtn.id = 'favBtn'
   inputContainer.append(favBtn)
   // favBtn.addEventListener('click',addFavorites())
   favBtn.hidden = true
   
   showBtn = document.createElement('button')
   showBtn.innerText = 'Show Favorites'
+  showBtn.id = 'showBtn'
   inputContainer.insertAdjacentElement('afterbegin',showBtn)
   showBtn.hidden = true
   
@@ -194,6 +212,8 @@ const setBootstrap = () => {
   iconText.className = "d-inline";
   sectionDown.className = "card-footer bg-transparent border-muted";
   currentTempDiv.className = "fs-1"
+  showBtn.className = 'btn btn-secondary'
+  favBtn.className = 'btn btn-secondary'
 
 
   // sectionLeft.className = "d-inline";
