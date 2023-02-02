@@ -171,12 +171,22 @@ const setBootstrap = () => {
 }
 
 const loadEvent = function() {
+  const introImg = document.querySelector(".introImg");
+
+  setTimeout(function(){
+    introImg.className = "introImgVisible";
+
+
+    setTimeout(function(){
+      const introContainer = document.querySelector(".introContainer");
+      introContainer.className = "introContainerHide";
+      introImg.className = "introImgHide";
+    },3000)
+  
+  },1000)
 
 
   createInput();
-
-
-
 }
 
 window.addEventListener("load", loadEvent);
