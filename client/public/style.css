@@ -98,7 +98,7 @@ h1 {
     left: 0px;
     top: 20px;
     transition: 1s;
-    z-index: -2;
+    z-index: 2;
 }
 
 .mainContainerAside {
@@ -263,6 +263,7 @@ input:focus {
     transition: 1s;
 
 }
+
 
 .favList {
     width: 30vw;
