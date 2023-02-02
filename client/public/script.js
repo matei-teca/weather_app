@@ -185,7 +185,7 @@ const loadEvent = function() {
       setTimeout(function(){
         introContainer.hidden = true;
         introImg.hidden = true;
-      })
+      }, 4000)
 
     },3000)
   
