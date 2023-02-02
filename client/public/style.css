@@ -28,13 +28,13 @@ a img {
     border: none;
 }
 
-::-webkit-scrollbar {
+.favList::-webkit-scrollbar {
     background-color: white;
     width: 10px;
     border-radius: 15px;
 }
 
-::-webkit-scrollbar-thumb {
+.favList::-webkit-scrollbar-thumb {
     border-radius: 15px;
     background-color: black;
     width: 10px;
