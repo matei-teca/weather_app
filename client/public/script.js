@@ -20,86 +20,75 @@ async function fetchData(currentPlace) {
 
 const displayStructure = (data) => {
 
-  console.log(data);
-
   divContainer.innerHTML = "";
 
   sectionUp = document.createElement("div");
   sectionUp.id = "sectionUp";
-  divContainer.appendChild(sectionUp);
+  divContainer.append(sectionUp);
 
   sectionLeft = document.createElement("div");
   sectionLeft.id = "sectionLeft";
-  sectionUp.appendChild(sectionLeft);
+  
+  temperatureDiv = document.createElement("div");
+  temperatureDiv.id = "temperatureDiv";
+  sectionUp.append(sectionLeft,temperatureDiv);
 
   nameDiv = document.createElement("div");
   nameDiv.id = "nameDiv";
-  sectionLeft.appendChild(nameDiv);
   nameDiv.innerText = data.location.name
 
   dateDiv = document.createElement("div");
   dateDiv.id = "dateDiv";
-  sectionLeft.appendChild(dateDiv);
   dateDiv.innerText = data.forecast.forecastday[0].date
 
   iconDiv = document.createElement("div");
   iconDiv.id = "iconDiv";
-  sectionLeft.appendChild(iconDiv);
+  sectionLeft.append(nameDiv, dateDiv, iconDiv);
 
   iconImg = document.createElement("img");
   iconImg.src = data.forecast.forecastday[0].day.condition.icon;
-  iconDiv.appendChild(iconImg);
+  iconDiv.append(iconImg);
 
   iconText = document.createElement("div");
   iconText.id = "iconText";
   iconText.innerText = data.forecast.forecastday[0].day.condition.text;
-  iconDiv.appendChild(iconText);
-
-  temperatureDiv = document.createElement("div");
-  temperatureDiv.id = "temperatureDiv";
-  sectionUp.appendChild(temperatureDiv);
+  iconDiv.append(iconImg, iconText);
 
   currentTempDiv = document.createElement("div");
   currentTempDiv.id = "currentTempDiv";
   currentTempDiv.innerText = data.forecast.forecastday[0].day.avgtemp_c + "\u00B0";
-  temperatureDiv.appendChild(currentTempDiv);
+  temperatureDiv.append(currentTempDiv);
 
   minMaxTempDiv = document.createElement("div");
   minMaxTempDiv.id = "minMaxTempDiv";
   minMaxTempDiv.innerText = `${data.forecast.forecastday[0].day.mintemp_c} \u00B0 / ${data.forecast.forecastday[0].day.maxtemp_c} \u00B0`;
-  temperatureDiv.appendChild(minMaxTempDiv);
+  temperatureDiv.append(minMaxTempDiv);
   
   // Botoom section
 
   sectionDown = document.createElement("div");
   sectionDown.id = "sectionDown";
-  divContainer.appendChild(sectionDown);
+  divContainer.append(sectionDown);
 
   for(let i = 1; i < 7; i++){
     let dayDiv = document.createElement("div");
     dayDiv.style.paddingLeft = "8px"
     dayDiv.style.paddingRight= "8px"
-    dayDiv.id = `day${i}`;
 
     let dayName = document.createElement("div");
     let dayIcon = document.createElement("img");
     let dayTemp = document.createElement("div");
     
-    dayDiv.append(dayName, dayIcon, dayTemp);
-
     dayName.innerText = days[(new Date(data.forecast.forecastday[i].date)).getDay()];
     dayIcon.src = data.forecast.forecastday[i].day.condition.icon;
     dayTemp.innerText = `${data.forecast.forecastday[i].day.mintemp_c}\u00B0 / ${data.forecast.forecastday[i].day.maxtemp_c}\u00B0`;
     dayTemp.style.fontSize = "15px"
     
+    dayDiv.append(dayName, dayIcon, dayTemp);
     sectionDown.appendChild(dayDiv)
   }
   
   favBtn.hidden = false
-  favBtn.addEventListener('click',addFavorites)
-  showBtn.addEventListener('click',showFavorites)
-
-  console.log(typeof data.forecast.forecastday[2].date);
   setBootstrap()
 }
 
@@ -127,7 +116,6 @@ const createInput = () => {
       });
 
       google.maps.event.addListener(autocomplete, "place_changed", function () {
-        // console.log(autocomplete.getPlace());
         let place = autocomplete.getPlace();
         fetchData(place.name);
       });
@@ -192,12 +180,13 @@ const createFavEl = () =>{
   favBtn.innerText = 'Add to Favorites'
   favBtn.id = 'favBtn'
   inputContainer.append(favBtn)
-  // favBtn.addEventListener('click',addFavorites())
+  favBtn.addEventListener('click',addFavorites)
   favBtn.hidden = true
   
   showBtn = document.createElement('button')
   showBtn.innerText = 'Show Favorites'
   showBtn.id = 'showBtn'
+  showBtn.addEventListener('click',showFavorites)
   inputContainer.insertAdjacentElement('afterbegin',showBtn)
   showBtn.hidden = true
   
