@@ -38,6 +38,8 @@ const createInput = () => {
   
   inputEl = document.createElement("input");
   inputEl.placeholder = "Search for a city";
+  inputEl.hidden = true
+  setTimeout(function(){inputEl.hidden = false},4000)
   inputContainer.append(inputEl);
   
   divContainer = document.createElement("div");
