@@ -181,6 +181,12 @@ const loadEvent = function() {
       const introContainer = document.querySelector(".introContainer");
       introContainer.className = "introContainerHide";
       introImg.className = "introImgHide";
+
+      setTimeout(function(){
+        introContainer.hidden = true;
+        introImg.hidden = true;
+      })
+
     },3000)
   
   },1000)
