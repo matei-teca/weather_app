@@ -130,6 +130,14 @@ const createInput = () => {
         // console.log(autocomplete.getPlace());
         let place = autocomplete.getPlace();
         fetchData(place.name);
+
+        console.log(autocomplete.getPlace());
+
+        const cityImg = document.querySelector(".cityImg");
+        cityImg.src = place.photos[0].getUrl();
+
+        console.log(place.photos[0].getUrl());
+
       });
   
         // inputEl.value = place.name + " ";
