@@ -2,8 +2,7 @@
 let rootEl, inputEl, divContainer, 
 sectionUp, nameDiv, dateDiv, 
 iconDiv, iconImg, iconText, 
-temperatureDiv, sectionDown, sectionLeft, minMaxTempDiv, currentTempDiv,favBtn, favList;
-let favArr = []
+temperatureDiv, sectionDown, sectionLeft, minMaxTempDiv, currentTempDiv, inputContainer;
 
 const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -104,10 +103,15 @@ const displayStructure = (data) => {
 const createInput = () => {
   rootEl = document.getElementById("root");
 
+  document.body.className = "bg-info";
+
+  inputContainer = document.createElement("div");
+  inputContainer.id = "inputContainer";
+  rootEl.appendChild(inputContainer);
+
   inputEl = document.createElement("input");
-  inputEl.placeholder = "test";
-  inputEl.setAttribute('list', 'favList')
-  rootEl.appendChild(inputEl);
+  inputEl.placeholder = "Search for a city";
+  inputContainer.appendChild(inputEl);
 
   divContainer = document.createElement("div");
   divContainer.id = "divContainer";
@@ -141,7 +145,7 @@ const setBootstrap = () => {
   // divContainer.classList.add("card", "border-success", "mb-3")
 
 
-  divContainer.className = "card border-muted";
+  divContainer.className = "card border-muted shadow-lg";
   iconImg.className = "d-inline";
   iconText.className = "d-inline";
   sectionDown.className = "card-footer bg-transparent border-muted";
@@ -160,33 +164,11 @@ const setBootstrap = () => {
 
 }
 
-const favorites = () =>{
-
-  favBtn = document.createElement('button')
-  favBtn.id = "favBtn"
-  favBtn.innerText = "Add to favorites"
-  favBtn.className = "btn btn-secondary"
-  rootEl.append(favBtn)
-
-  favList = document.createElement('datalist')
-  favList.id = 'favList' 
-
-  favBtn.addEventListener('click', (e) =>{
-    let option = document.createElement('option')
-    option.value = inputEl.value
-    favList.append(option)
-    console.log(favList)
-  })
-
-
-
-}
 
 const loadEvent = function() {
 
 
   createInput();
-  favorites()
 
 
 
