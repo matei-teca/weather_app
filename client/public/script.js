@@ -20,8 +20,6 @@ async function fetchData(currentPlace) {
 
 const displayStructure = (data) => {
 
-  console.log(data);
-
   divContainer.innerHTML = "";
 
   sectionUp = document.createElement("div");
@@ -204,8 +202,6 @@ const createFavEl = () =>{
   }
 
 const setBootstrap = () => {
-  // divContainer.classList.add("card", "border-success", "mb-3")
-
 
   divContainer.className = "card border-muted shadow-lg";
   iconImg.className = "d-inline";
@@ -215,29 +211,16 @@ const setBootstrap = () => {
   showBtn.className = 'btn btn-secondary'
   favBtn.className = 'btn btn-secondary'
 
-
-  // sectionLeft.className = "d-inline";
-  // temperatureDiv.className = "d-inline";
-  // nameDiv.className = "card-header bg-transparent";
-  // currentTempDiv.className = "d-block";
-  // minMaxTempDiv.className = "d-block";
-  // sectionUp.className = "d-inline"
-  // sectionLeft.className = "p-25"
-
-
-
 }
 
-
-const loadEvent = function() {
+const introAnimation = () => {
   const introImg = document.querySelector(".introImg");
+  const introContainer = document.querySelector(".introContainer");
 
   setTimeout(function(){
     introImg.className = "introImgVisible";
 
-
     setTimeout(function(){
-      const introContainer = document.querySelector(".introContainer");
       introContainer.className = "introContainerHide";
       introImg.className = "introImgHide";
 
@@ -249,11 +232,13 @@ const loadEvent = function() {
     },3000)
   
   },1000)
+}
 
+const loadEvent = function() {
 
+  introAnimation();
   createInput();
   createFavEl();
-
 
 }
 
