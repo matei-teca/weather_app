@@ -28,6 +28,18 @@ a img {
     border: none;
 }
 
+::-webkit-scrollbar {
+    background-color: white;
+    width: 10px;
+    border-radius: 15px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 15px;
+    background-color: black;
+    width: 10px;
+}
+
 input,
 textarea,
 select,
@@ -75,7 +87,7 @@ h1 {
 
 }
 
-.mainContainer{
+.mainContainer {
     position: absolute;
     display: flex;
     justify-content: center;
@@ -167,7 +179,7 @@ h1 {
     align-items: center;
 }
 
-input{
+input {
     border: 1px solid rgba(0, 0, 0, 0.476);
     padding: 10px;
     border-radius: 10px;
@@ -176,7 +188,7 @@ input{
 
 }
 
-input:focus{
+input:focus {
     border: 1px solid rgb(255, 255, 255);
 }
 
@@ -184,7 +196,7 @@ input:focus{
     margin-left: 20px;
 }
 
-.introContainer{
+.introContainer {
     width: 100vw;
     height: 100vh;
     background-color: rgb(1, 1, 6);
@@ -195,7 +207,7 @@ input:focus{
     transition: 1s;
 }
 
-.introContainerHide{
+.introContainerHide {
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -234,6 +246,19 @@ input:focus{
 
 }
 
+.favList {
+    position: absolute;
+    top: 200px;
+    left: 40px;
+    width: 30vw;
+    max-height: 400px;
+    border: 2px solid black;
+    border-radius: 15px;
+    color: black;
+    background-color: white;
+    overflow-x: auto;
+
+}
 
 
 /* #iconDiv {

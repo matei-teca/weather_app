@@ -143,14 +143,8 @@ const createInput = () => {
     
   })
 
-  inputEl.addEventListener("dblclick", function(){
-    const mainContainer = document.querySelector(".mainContainer");
-    mainContainer.className = "mainContainerAside";
-
-    console.log("works")
-  })
-
-
+  
+  
 }
 
 const addFavorites = () =>{
@@ -163,30 +157,33 @@ const addFavorites = () =>{
     inputEl.value = e.target.innerText
     fetchData(e.target.innerText)
   })
-
+  
 }
 
 const showFavorites = () =>{
   favList.hidden = false
+  const mainContainer = document.querySelector(".mainContainer");
+  mainContainer.className = "mainContainerAside";
+  console.log("works")
 }
 
-  const createFavEl = () =>{
-    favList = document.createElement('div')
-    favList.className = 'favList'
-    document.body.append(favList)
-    favList.hidden = true
+const createFavEl = () =>{
+  favList = document.createElement('div')
+  favList.className = 'favList'
+  document.body.append(favList)
+  favList.hidden = true
   
-    favBtn = document.createElement('button')
-    favBtn.innerText = 'Add to Favorites'
-    inputContainer.append(favBtn)
-    // favBtn.addEventListener('click',addFavorites())
-    favBtn.hidden = true
+  favBtn = document.createElement('button')
+  favBtn.innerText = 'Add to Favorites'
+  inputContainer.append(favBtn)
+  // favBtn.addEventListener('click',addFavorites())
+  favBtn.hidden = true
   
-    showBtn = document.createElement('button')
-    showBtn.innerText = 'Show Favorites'
-    inputContainer.insertAdjacentElement('afterbegin',showBtn)
-    showBtn.hidden = true
-
+  showBtn = document.createElement('button')
+  showBtn.innerText = 'Show Favorites'
+  inputContainer.insertAdjacentElement('afterbegin',showBtn)
+  showBtn.hidden = true
+  
   }
 
 const setBootstrap = () => {
