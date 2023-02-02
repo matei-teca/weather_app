@@ -2,7 +2,10 @@
 let rootEl, inputEl, divContainer, 
 sectionUp, nameDiv, dateDiv, 
 iconDiv, iconImg, iconText, 
-temperatureDiv, sectionDown, sectionLeft, minMaxTempDiv, currentTempDiv, inputContainer;
+temperatureDiv, sectionDown, 
+sectionLeft, minMaxTempDiv, 
+currentTempDiv, inputContainer,
+favBtn, showBtn, favList;
 
 const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -73,8 +76,6 @@ const displayStructure = (data) => {
   sectionDown.id = "sectionDown";
   divContainer.appendChild(sectionDown);
 
-
-
   for(let i = 1; i < 7; i++){
     let dayDiv = document.createElement("div");
     dayDiv.style.paddingLeft = "8px"
@@ -95,9 +96,12 @@ const displayStructure = (data) => {
     sectionDown.appendChild(dayDiv)
   }
   
+  favBtn.hidden = false
+  favBtn.addEventListener('click',addFavorites)
+  showBtn.addEventListener('click',showFavorites)
+
   console.log(typeof data.forecast.forecastday[2].date);
   setBootstrap()
-
 }
 
 const createInput = () => {
@@ -108,11 +112,11 @@ const createInput = () => {
   inputContainer = document.createElement("div");
   inputContainer.id = "inputContainer";
   rootEl.appendChild(inputContainer);
-
+  
   inputEl = document.createElement("input");
   inputEl.placeholder = "Search for a city";
   inputContainer.appendChild(inputEl);
-
+  
   divContainer = document.createElement("div");
   divContainer.id = "divContainer";
   rootEl.appendChild(divContainer);
@@ -140,6 +144,42 @@ const createInput = () => {
 
 
 }
+
+const addFavorites = () =>{
+  let li = document.createElement('p')
+  li.innerText = inputEl.value
+  favList.append(li)
+  showBtn.hidden = false
+  li.addEventListener('click', (e) =>{
+    console.log(e.target.innerText)
+    inputEl.value = e.target.innerText
+    fetchData(e.target.innerText)
+  })
+
+}
+
+const showFavorites = () =>{
+  favList.hidden = false
+}
+
+  const createFavEl = () =>{
+    favList = document.createElement('div')
+    favList.className = 'favList'
+    document.body.append(favList)
+    favList.hidden = true
+  
+    favBtn = document.createElement('button')
+    favBtn.innerText = 'Add to Favorites'
+    inputContainer.append(favBtn)
+    // favBtn.addEventListener('click',addFavorites())
+    favBtn.hidden = true
+  
+    showBtn = document.createElement('button')
+    showBtn.innerText = 'Show Favorites'
+    inputContainer.insertAdjacentElement('afterbegin',showBtn)
+    showBtn.hidden = true
+
+  }
 
 const setBootstrap = () => {
   // divContainer.classList.add("card", "border-success", "mb-3")
@@ -169,6 +209,7 @@ const loadEvent = function() {
 
 
   createInput();
+  createFavEl();
 
 
 
