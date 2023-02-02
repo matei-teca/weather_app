@@ -11,8 +11,7 @@ const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 async function fetchData(currentPlace) {
   const API_KEY = 'a812d4795a874a76b3081357233101';
-  let url = `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${currentPlace}&days=7`;
-
+  let url = `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${currentPlace.normalize('NFD').replace(/[\u0300-\u036f]/g,'')}&days=7`;
   const response = await fetch(url);
   const data = await response.json();
 
